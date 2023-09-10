@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:798000006657:task-definition/springboot-test-task:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:798000006657:task-definition/springboot-task:1",
     "containerDefinitions": [
         {
             "name": "springboot-test",
-            "image": "public.ecr.aws/t5z9b6p3/springboot",
+            "image": "798000006657.dkr.ecr.ap-northeast-2.amazonaws.com/springboot-test-app:d22d78fb70f28a1e9a7c2c340a45d23282d3c1c6",
             "cpu": 0,
             "portMappings": [
                 {
@@ -24,7 +24,7 @@
                 "logDriver": "awslogs",
                 "options": {
                     "awslogs-create-group": "true",
-                    "awslogs-group": "/ecs/springboot-test-task",
+                    "awslogs-group": "/ecs/springboot-task",
                     "awslogs-region": "ap-northeast-2",
                     "awslogs-stream-prefix": "ecs"
                 },
@@ -32,7 +32,7 @@
             }
         }
     ],
-    "family": "springboot-test-task",
+    "family": "springboot-task",
     "executionRoleArn": "arn:aws:iam::798000006657:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
@@ -46,7 +46,13 @@
             "name": "ecs.capability.execution-role-awslogs"
         },
         {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
@@ -72,7 +78,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-09-10T13:48:02.623Z",
+    "registeredAt": "2023-09-10T15:23:59.782Z",
     "registeredBy": "arn:aws:iam::798000006657:user/developer",
     "tags": []
 }

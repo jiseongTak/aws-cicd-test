@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot") version "3.1.3"
@@ -40,4 +41,14 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks {
+    named<Jar>("jar") {
+        enabled = false
+    }
+
+    named<BootJar>("bootJar") {
+        archiveFileName = "app.jar"
+    }
 }

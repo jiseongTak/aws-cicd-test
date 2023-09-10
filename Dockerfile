@@ -7,7 +7,7 @@ EXPOSE 8080
 # 작업 공간 이동
 #WORKDIR /app
 # Jar 파일 경로
-ARG JAR_FILE_PATH=build/libs/*.jar
+ARG JAR_FILE_PATH=/build/libs/*.jar
 # Jar 파일 복제
 COPY ${JAR_FILE_PATH} app.jar
 

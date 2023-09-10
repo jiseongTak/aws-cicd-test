@@ -1,13 +1,15 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:798000006657:task-definition/springboot-task:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:798000006657:task-definition/springboot-task2:1",
     "containerDefinitions": [
         {
-            "name": "springboot-test",
-            "image": "798000006657.dkr.ecr.ap-northeast-2.amazonaws.com/springboot-test-app:d22d78fb70f28a1e9a7c2c340a45d23282d3c1c6",
-            "cpu": 0,
+            "name": "springboot-test-app",
+            "image": "798000006657.dkr.ecr.ap-northeast-2.amazonaws.com/springboot-test-app:latest",
+            "cpu": 2048,
+            "memory": 8192,
+            "memoryReservation": 8192,
             "portMappings": [
                 {
-                    "name": "springboot-test-8080-tcp",
+                    "name": "springboot-test-app-8080-tcp",
                     "containerPort": 8080,
                     "hostPort": 8080,
                     "protocol": "tcp",
@@ -24,7 +26,7 @@
                 "logDriver": "awslogs",
                 "options": {
                     "awslogs-create-group": "true",
-                    "awslogs-group": "/ecs/springboot-task",
+                    "awslogs-group": "/ecs/springboot-task2",
                     "awslogs-region": "ap-northeast-2",
                     "awslogs-stream-prefix": "ecs"
                 },
@@ -32,7 +34,8 @@
             }
         }
     ],
-    "family": "springboot-task",
+    "family": "springboot-task2",
+    "taskRoleArn": "arn:aws:iam::798000006657:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::798000006657:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
@@ -50,6 +53,12 @@
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
@@ -72,13 +81,13 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "1024",
-    "memory": "3072",
+    "cpu": "2048",
+    "memory": "8192",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-09-10T15:23:59.782Z",
+    "registeredAt": "2023-09-10T15:51:10.017Z",
     "registeredBy": "arn:aws:iam::798000006657:user/developer",
     "tags": []
 }

@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  database:
+    image: mysql
+    container_name: aws-test-mysql
+    environment:
+      - MYSQL_DATABASE=test_db
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=1234
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "23306:3306"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+    container_name: app_test01
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://aws-test-mysql:3306/test_db?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_PROFILES_ACTIVE: prod

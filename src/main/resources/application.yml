@@ -1,0 +1,51 @@
+spring:
+  profiles:
+    active: local # default profile
+    group:
+      local:
+        - common
+      prod:
+        - common
+
+---
+spring:
+  config:
+    activate:
+      on-profile: common
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test_db
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+greeting:
+  message: Hello local!
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://aws-test-mysql:3306/test_db
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+greeting:
+  message: Hello prod!!!

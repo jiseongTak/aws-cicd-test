@@ -23,25 +23,23 @@
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
-FROM eclipse-temurin:17-jdk-alpine AS builder
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle.kts .
-COPY settings.gradle.kts .
-COPY src src
-RUN dos2unix ./gradlew
-RUN chmod +x gradlew
-RUN ./gradlew bootJar
-
-FROM eclipse-temurin:17-jdk-alpine
-COPY --from=builder build/libs/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-VOLUME /tmp
+#FROM eclipse-temurin:17-jdk-alpine AS builder
+#COPY gradlew .
+#COPY gradle gradle
+#COPY build.gradle.kts .
+#COPY settings.gradle.kts .
+#COPY src src
+#RUN dos2unix ./gradlew
+#RUN chmod +x gradlew
+#RUN ./gradlew bootJar
 
 #FROM eclipse-temurin:17-jdk-alpine
-#ARG JAR_FILE=build/libs/*.jar
-#COPY ${JAR_FILE} ./app.jar
-##COPY pharmacy.csv ./
-#ENV TZ=Asia/Seoul
-#ENTRYPOINT ["java", "-jar", "./app.jar"]
+#COPY --from=builder build/libs/*.jar app.jar
+#ENTRYPOINT ["java", "-jar", "/app.jar"]
+#VOLUME /tmp
+
+FROM eclipse-temurin:17-jdk-alpine
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} ./app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "./app.jar"]

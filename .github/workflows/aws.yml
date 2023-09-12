@@ -32,11 +32,10 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2
-  ECR_REPOSITORY: springboot-test-app
+  ECR_REPOSITORY: aws-test-repo
   ECS_SERVICE: springboot-service2
   ECS_CLUSTER: springboot-test2
   ECS_TASK_DEFINITION: springboot-task2-revision1.json
-  CONTAINER_NAME: springboot-test-app
 
   ACTIVE_PROFILE: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
 
